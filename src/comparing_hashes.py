@@ -32,7 +32,7 @@ def compare_hashes(filename, known_sha256):
         print('!!!' + '=' * 94 + '!!!')
 
 # Take input from user for the file name and known SHA-256 hash value
-filename = input("Enter the path to the filename:\n")
+filename = input("Enter the path to the filename from root folder:\n")
 known_sha256 = input("Enter the known SHA-256 hash value:\n")
 
 # Call the compare_hashes function with the user inputs
