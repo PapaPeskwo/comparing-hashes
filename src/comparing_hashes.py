@@ -1,7 +1,5 @@
 import subprocess, os, platform
 
-#os.system('cls' if os.name == 'nt' else 'clear') 
-
 def generate_sha256(filename):
     if platform.system() == "Windows":
         # Generate SHA-256 hash value of file using certutil command
