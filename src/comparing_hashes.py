@@ -1,8 +1,14 @@
-import subprocess
+import subprocess, os, platform
+
+#os.system('cls' if os.name == 'nt' else 'clear') 
 
 def generate_sha256(filename):
-    # Generate SHA-256 hash value of file using certutil command
-    sha256 = subprocess.check_output(["certutil", "-hashfile", filename, "SHA256"]).split()[4]
+    if platform.system() == "Windows":
+        # Generate SHA-256 hash value of file using certutil command
+        sha256 = subprocess.check_output(["certutil", "-hashfile", filename, "SHA256"]).split()[-6]
+    else:
+        # Generate SHA-256 hash value of file using certutil command
+        sha256 = subprocess.check_output(["sha256sum", filename]).split()[0]
     # Remove the newline character from the end of the hash value
     sha256 = sha256.decode("utf-8").rstrip()
     # Return the SHA-256 hash value as a string
@@ -17,16 +23,16 @@ def compare_hashes(filename, known_sha256):
     if file_sha256 == known_sha256:
         print()
         print('+' + '=' * 98 + '+')
-        print(f"The file {filename} is authentic.")
+        print(f"The file: \n{filename} \nis authentic.")
         print('+' + '=' * 98 + '+')
     else:
         print()
         print('!!!' + '=' * 94 + '!!!')
-        print(f"THE FILE {filename} MAY HAVE BEEN TAMPERED WITH.")
+        print(f"THE FILE: \n{filename} \nMAY HAVE BEEN TAMPERED WITH.")
         print('!!!' + '=' * 94 + '!!!')
 
 # Take input from user for the file name and known SHA-256 hash value
-filename = input("Enter the path to the filename:\n")
+filename = input("Enter the path to the filename from root folder:\n")
 known_sha256 = input("Enter the known SHA-256 hash value:\n")
 
 # Call the compare_hashes function with the user inputs
