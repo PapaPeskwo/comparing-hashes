@@ -1,12 +1,22 @@
-import subprocess
+import subprocess, os, platform
+
+#os.system('cls' if os.name == 'nt' else 'clear') 
 
 def generate_sha256(filename):
-    # Generate SHA-256 hash value of file using certutil command
-    sha256 = subprocess.check_output(["certutil", "-hashfile", filename, "SHA256"]).split()[4]
-    # Remove the newline character from the end of the hash value
-    sha256 = sha256.decode("utf-8").rstrip()
-    # Return the SHA-256 hash value as a string
-    return sha256
+    if platform.system() != 'Windows':
+        # Generate SHA-256 hash value of file using certutil command
+        sha256 = subprocess.check_output(["sha256sum", filename]).split()[0]
+        # Remove the newline character from the end of the hash value
+        sha256 = sha256.decode("utf-8").rstrip()
+        # Return the SHA-256 hash value as a string
+        return sha256
+    else:
+        # Generate SHA-256 hash value of file using certutil command
+        sha256 = subprocess.check_output(["certutil", "-hashfile", filename, "SHA256"]).split()[4]
+        # Remove the newline character from the end of the hash value
+        sha256 = sha256.decode("utf-8").rstrip()
+        # Return the SHA-256 hash value as a string
+        return sha256
 
 def compare_hashes(filename, known_sha256):
     # Generate SHA-256 hash value of file using certutil command
