@@ -3,18 +3,18 @@ Open source projects usually provide a SHA256 hash value to compare to the progr
 ## How to use
 Windows:
 ```
-py src/comparing_hashes.py
+py comparing_hashes.py
 ```
 Linux:
 ```
-python3 src/comparing_hashes.py
+python3 comparing_hashes.py
 ```
 Copy the path to the downloaded file, don't extract it yet.
 Copy the provided SHA-256 hash value (provided by the comapny, most likely next to the download link)
 
 ## Example
 ```
-$ py src/comparing_hashes.py
+$ py comparing_hashes.py
 Enter the path to the filename:
 C:\Users\user\Downloads\prometheus-2.43.0.windows-amd64.zip
 Enter the known SHA-256 hash value:
