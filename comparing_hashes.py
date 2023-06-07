@@ -1,16 +1,15 @@
 import subprocess
 import platform
+import os
+import time
 import tkinter as tk
 from tkinter import filedialog
-from consolemenu import *
-from consolemenu.items import *
 
 def generate_sha1(filename):
     if platform.system() == "Windows":
         sha1 = subprocess.check_output(["certutil", "-hashfile", filename, "SHA1"]).split()[-6]
     else:
         sha1 = subprocess.check_output(["sha1sum", filename]).split()[0]
-
     sha1 = sha1.decode("utf-8").rstrip()
     return sha1
 
@@ -19,7 +18,6 @@ def generate_sha256(filename):
         sha256 = subprocess.check_output(["certutil", "-hashfile", filename, "SHA256"]).split()[-6]
     else:
         sha256 = subprocess.check_output(["sha256sum", filename]).split()[0]
-
     sha256 = sha256.decode("utf-8").rstrip()
     return sha256
 
@@ -28,7 +26,6 @@ def generate_sha512(filename):
         sha512 = subprocess.check_output(["certutil", "-hashfile", filename, "SHA512"]).split()[-6]
     else:
         sha512 = subprocess.check_output(["sha512sum", filename]).split()[0]
-
     sha512 = sha512.decode("utf-8").rstrip()
     return sha512
 
@@ -64,19 +61,27 @@ def hash_sha512():
     known_hash = input("\nEnter the known SHA-512 hash value:\n").lower().strip()
     open_file_dialog(known_hash, generate_sha512)
 
-# Create the menu
-menu = ConsoleMenu("Hash Comparison", "Select a hash function")
+# Menu
+while True:
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("\nHash Comparison")
+    print("Select a hash function")
+    print("1. SHA1")
+    print("2. SHA256")
+    print("3. SHA512")
+    print("4. Exit")
 
-# Create some items
+    choice = input("\nEnter your choice (1-4): ")
 
-item_sha1 = FunctionItem("SHA1", hash_sha1)
-item_sha256 = FunctionItem("SHA256", hash_sha256)
-item_sha512 = FunctionItem("SHA512", hash_sha512)
-
-# Add the items to the menu
-menu.append_item(item_sha1)
-menu.append_item(item_sha256)
-menu.append_item(item_sha512)
-
-# Finally, show the menu
-menu.show()
+    if choice == '1':
+        hash_sha1()
+    elif choice == '2':
+        hash_sha256()
+    elif choice == '3':
+        hash_sha512()
+    elif choice == '4':
+        print("Exiting.")
+        break
+    else:
+        print("Invalid choice. Please enter a number between 1 and 4.")
+        time.sleep(2)
