@@ -1,6 +1,6 @@
 # Comparing Hashes
 
-Open source projects often provide SHA1, SHA256, or SHA512 hash values to compare with the program you're downloading. Comparing it manually is redundant, so this program was created to do that for you. It supports SHA1, SHA256, and SHA512 hash comparisons.
+Open source projects often provide MD5, SHA1, SHA256, or SHA512 hash values to compare with the program you're downloading. Comparing it manually is redundant, so this program was created to do that for you. It supports MD5, SHA1, SHA256, and SHA512 hash comparisons.
 
 ## How to use
 
@@ -8,7 +8,7 @@ Open source projects often provide SHA1, SHA256, or SHA512 hash values to compar
 python comparing_hashes.py
 ```
 
-The program will prompt you to select the hash type (SHA1, SHA256, or SHA512) first. Then, enter the provided hash value (provided by the company, most likely next to the download link). Afterwards, a file explorer will open and you can select the downloaded file.
+The program will prompt you to select the hash type (MD5, SHA1, SHA256, or SHA512) first. Then, enter the provided hash value (provided by the company, most likely next to the download link). Afterwards, a file explorer will open and you can select the downloaded file.
 
 ## Example
 
@@ -16,10 +16,11 @@ The program will prompt you to select the hash type (SHA1, SHA256, or SHA512) fi
 $ python comparing_hashes.py
 
 Select a hash function:
-1. SHA1
-2. SHA256
-3. SHA512
-Enter choice: 2
+1. MD5
+2. SHA1
+3. SHA256
+4. SHA512
+Enter choice: 3
 
 Enter the known SHA-256 hash value:
 98e9feb991293b7ee5ccd5561604db1dc7c4b532546ecce7180fd80b7459aa5e
