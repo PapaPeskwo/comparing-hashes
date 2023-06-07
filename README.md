@@ -1,11 +1,11 @@
-# Comparing Hashes
+# Checksum Verifier
 
 Open source projects often provide MD5, SHA1, SHA256, or SHA512 hash values to compare with the program you're downloading. Comparing it manually is redundant, so this program was created to do that for you. It supports MD5, SHA1, SHA256, and SHA512 hash comparisons.
 
 ## How to use
 
 ```bash
-python comparing_hashes.py
+python checksum-verifier.py
 ```
 
 The program will prompt you to select the hash type (MD5, SHA1, SHA256, or SHA512) first. Then, enter the provided hash value (provided by the company, most likely next to the download link). Afterwards, a file explorer will open and you can select the downloaded file.
@@ -13,7 +13,7 @@ The program will prompt you to select the hash type (MD5, SHA1, SHA256, or SHA51
 ## Example
 
 ```bash
-$ python comparing_hashes.py
+$ python checksum-verifier.py
 
 Select a hash function:
 1. MD5
