@@ -4,7 +4,10 @@ import os
 import time
 import tkinter as tk
 from tkinter import filedialog
+from rich.console import Console
+from rich.panel import Panel
 
+console = Console()
 
 def generate_sha1(filename):
     if platform.system() == "Windows":
@@ -40,18 +43,15 @@ def generate_md5(filename):
 
 def compare_hashes(filename, known_hash, hash_function):
     file_hash = hash_function(filename)
-    print(f"\nKnown hash value: {known_hash}")
-    print(f"File hash value: {file_hash}")
+    known_hash_panel = Panel(f"[bold]Known hash value:[/bold] {known_hash}", border_style="bold green")
+    file_hash_panel = Panel(f"[bold]File hash value:[/bold] {file_hash}", border_style="bold green")
+    console.print(known_hash_panel)
+    console.print(file_hash_panel)
     if file_hash == known_hash:
-        print()
-        print('+' + '=' * 98 + '+')
-        print(f"The file: \n{filename} \nis authentic.")
-        print('+' + '=' * 98 + '+')
+        result_panel = Panel(f"The file: \n{filename} \nis authentic.", title="Result", border_style="bold green")
     else:
-        print()
-        print('!!!' + '=' * 94 + '!!!')
-        print(f"THE FILE: \n{filename} \nMAY HAVE BEEN TAMPERED WITH.")
-        print('!!!' + '=' * 94 + '!!!')
+        result_panel = Panel(f"THE FILE: \n{filename} \nMAY HAVE BEEN TAMPERED WITH.", title="Result", border_style="bold red")
+    console.print(result_panel)
     input("\nPress Enter to return to menu.")
 
 def open_file_dialog(known_hash, hash_function):
@@ -77,14 +77,16 @@ def hash_md5():
 # Menu
 while True:
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("\nHash Comparison")
-    print("Select a hash function")
-    print("1. MD5")
-    print("2. SHA1")
-    print("3. SHA256")
-    print("4. SHA512")
-    print("5. Exit")
-
+    menu_text = """
+    Hash Comparison
+    Select a hash function
+    1. MD5
+    2. SHA1
+    3. SHA256
+    4. SHA512
+    5. Exit
+    """
+    console.print(Panel(menu_text, title="Menu", border_style="bold green"))
     choice = input("\nEnter your choice (1-5): ")
 
     if choice == '1':
@@ -99,5 +101,6 @@ while True:
         print("Exiting.")
         break
     else:
-        print("Invalid choice. Please enter a number between 1 and 5.")
+        error_panel = Panel("Invalid choice. Please enter a number between 1 and 5.", border_style="bold red")
+        console.print(error_panel)
         time.sleep(2)
